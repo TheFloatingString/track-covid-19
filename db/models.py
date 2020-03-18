@@ -1,4 +1,4 @@
-from sqlalchemy import Table, Column, Integer, Float, String, MetaData, DateTime, Boolean, Array
+from sqlalchemy import Table, Column, Integer, Float, String, MetaData, DateTime, Boolean
 from sqlalchemy.types import ARRAY
 from sqlalchemy	import create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -74,14 +74,15 @@ class LocationUpdate(Base):
 		self.location_uuid = location_uuid
 		self.user_uuid = user_uuid
 		self.description = description
-		
+
 class User(Base):
+	__tablename__ = "users"
 
 	id = Column(Integer, primary_key=True, autoincrement=True)
 	uuid = Column(UUID(as_uuid=True), default=uuid4)
 	first_name = Column(String)
 	last_name = Column(String)
-	password_hash = Column(fdaf)
+	password_hash = Column(String)
 	email = Column(String)
 	description = Column(String)
 	date_created = Column(DateTime)
