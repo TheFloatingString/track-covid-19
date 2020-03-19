@@ -21,7 +21,11 @@
 	<style type="text/css">
 
 		body{
-			padding-left: 20px;
+			/*padding-left: 20px;*/
+		}
+
+		.container{
+			margin: 0;
 		}
 
 		.standard-padding{
@@ -102,30 +106,42 @@
 <nav class="navbar navbar-light bg-light" style="height:50px">
   <a class="navbar-brand" href="#">COVID-ZERO</a>
 </nav>
-<div id="row-custom-1" class="row">
-	<div class="col-custom-1">
-		<div id="city">
-			<!-- <div class="card" style="margin: 2px; height: 5px;"> -->
-			  <!-- <div class="card-body"> -->
-			    <p>Select region: Montreal </p>
-			  <!-- </div> -->
-			<!-- </div> -->
+<div class="container">
+	<div id="row-custom-1" class="row">
+		<div class="col-custom-1">
+			<div id="city">
+				<!-- <div class="card" style="margin: 2px; height: 5px;"> -->
+				  <!-- <div class="card-body"> -->
+				    <p>Select region: Montreal </p>
+				  <!-- </div> -->
+				<!-- </div> -->
+			</div>
+			<div id="stats-header" >
+				<div class="container">
+					<div class="row" style="vertical-align: text-bottom;">
+						<div style="width: 25%;">
+							<b>X</b> cases in Montreal
+						</div>
+						<div style="width: 25%;">
+							<b>X</b> cases in Montreal
+						</div>
+						<div style="width: 25%;">
+							<b>X</b> cases in Montreal
+						</div>
+						<div style="width: 25%;">
+							<b>X</b> cases in Montreal
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="map-container">
+				<div id="mapid"></div>
+			</div>
 		</div>
-		<div id="stats-header" >
-			<p>Hello abcdefghijklmop</p>
-			<!-- <div class="card" style="margin: 2px;">
-			  <div class="card-body">
-			    This is some text within a card body.
-			  </div>
-			</div> -->
-		</div>
-		<div id="map-container">
-			<div id="mapid"></div>
-		</div>
-	</div>
-	<div class="col-custom-2 standard-padding">
-		<div id="updates">
-			<p>Hello</p>
+		<div class="col-custom-2 standard-padding">
+			<div id="updates">
+				<p>Hello</p>
+			</div>
 		</div>
 	</div>
 </div>
