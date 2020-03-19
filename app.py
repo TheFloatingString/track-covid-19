@@ -1,7 +1,7 @@
 import os
 
 from src import webscrape_data
-from db.models import TransitLine
+from db.models import TransitLine, View
 
 from flask import Flask, render_template
 from flask_cors import CORS, cross_origin
@@ -24,6 +24,10 @@ session = Session()
 @cross_origin()
 @app.route("/")
 def home():
+	view = View()
+	view.create_view()
+	session.add(view)
+	session.commit()
 	return render_template("home.html")
 
 @cross_origin()
@@ -50,4 +54,6 @@ def contact():
 	return render_template("contact.html")
 
 if __name__ == '__main__':
+	for x in session.query(View):
+		print(x.id, x.date_created)
 	app.run(debug=True)
