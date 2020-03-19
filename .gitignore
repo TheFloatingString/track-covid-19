@@ -2,3 +2,5 @@ data
 venv 
 src/read_shapefiles.py
 credentials.json
+**/__pycache__
+
