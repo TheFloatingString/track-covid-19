@@ -13,9 +13,9 @@ class CovidScraper:
 		self.quebec_prov_cases = -1
 
 		# print(self.page.text)
-		print(self.soup.text)
-		print(self.htmltable.text)
-
+    # print(self.soup.text)
+		# print(self.htmltable.text)
+    
 		for row in self.rows:
 			row_list = row.find_all("td")
 			# print(row_list)
