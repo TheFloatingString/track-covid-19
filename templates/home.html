@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Quick Start - Leaflet</title>
+    <title>COVID-ZERO</title>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,12 +27,21 @@
             /*padding-left: 20px;*/
         }
         
+		a{
+			color: #818aeb;
+		}
+
+		.large-number{
+			font-weight: 500;
+			font-size: 32px;
+		}
+
         .container {
             margin: 0;
         }
         
         .standard-padding {
-            padding: 0px;
+            padding: 10px;
         }
         /*	.nav{
 			height: 50px;
@@ -53,8 +62,12 @@
             height: 100px;
         }
         
+		#map-label{
+			height: 50px;
+		}
+
         #mapid {
-            height: 100%;
+            height: calc(100vh - 250px);
         }
         
         #updates {
@@ -105,26 +118,26 @@
 <body>
 
     <nav class="navbar navbar-light bg-light" style="height:50px">
-        <a class="navbar-brand" href="#">COVID-ZERO</a>
+        <a class="navbar-brand" href="/">COVID-ZERO</a>
     </nav>
-    <div class="container">
+    <div class="container-fluid">
         <div id="row-custom-1" class="row">
             <div class="col-custom-1">
-                <div id="city">
+                <div id="city" class="standard-padding">
                     <!-- <div class="card" style="margin: 2px; height: 5px;"> -->
                     <!-- <div class="card-body"> -->
-                    <p>Select region: Montreal </p>
+                    <p>Selected region: Montreal </p>
                     <!-- </div> -->
                     <!-- </div> -->
                 </div>
-                <div id="stats-header">
+                <div id="stats-header" class="standard-padding">
                     <div class="container">
                         <div class="row" style="vertical-align: text-bottom;">
                             <div style="width: 25%;">
-                                <b><span id="montreal-cases"></span></b> cases in Montreal
+                                <span class="large-number" id="montreal-cases"></span> <br>cases in Montreal*
                             </div>
                             <div style="width: 25%;">
-                                <b><span id="quebec-prov-cases"></span></b> cases in Quebec
+                                <span id="quebec-prov-cases" class="large-number"></span><br>cases in Quebec*
                             </div>
                             <!-- 						<div style="width: 25%;">
 							<b>X</b> cases in Montreal
@@ -136,13 +149,27 @@
                     </div>
                 </div>
                 <div id="map-container">
+                	<div id="map-label" class="standard-padding">
+                		<p>Map of targeted surveillance (click coloured locations for more details)**</p>
+                	</div>
                     <div id="mapid"></div>
                 </div>
             </div>
             <div class="col-custom-2 standard-padding">
                 <div id="updates">
-                    <p>Updates</p>
-                    <p><i>Coming soon</i></p>
+                    <p><b>Updates</b>
+                    <br><i>Coming soon</i></p>
+
+                    <p><b>Data Sources</b>
+                	<br><a href="https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/situation-coronavirus-in-quebec/" target="__blank">Number of cases in Québec (Govt. of Québec)</a>
+                    <br><a href="https://www.quebec.ca/en/health/health-issues/a-z/general-information-about-coronavirus/" target="__blank">Targeted Surveillance in Montreal (Govt. of Québec)</a>
+					<br>* Number of cases are updated in real time according to the above data sources
+					<br>** Targeted surveillance details are updated manually to be as up to date as possible.
+                    </p>
+
+                    <p><b>Contact page creator (comments, suggestions, questions?)</b>
+                    <br><a href="/contact">Contact information</a> 	
+                    </p>
                 </div>
             </div>
         </div>
@@ -174,7 +201,7 @@
                 console.log(line);
                 console.log(line.coordinates)
                 L.polygon(line.coordinates, {
-                    color: "red"
+                    color: "orange"
                 }).addTo(mymap).bindPopup(line.description);
             }
         })
@@ -182,8 +209,8 @@
         console.log(variable);
 
         L.circle([45.475530, -73.614430], {
-            color: 'red',
-            radius: 50
+            color: 'orange',
+            radius: 100
         }).addTo(mymap).bindPopup(`Bibliothèque de Notre-Dame-de-Grâce 
 			3755, rue Botrel, Montréal H4A 3G8
 			Children's section (2nd floor)
@@ -191,8 +218,8 @@
 			 End of targeted surveillance: March 25, 2020`);
 
         L.circle([45.466953, -73.742924], {
-            color: 'red',
-            radius: 500
+            color: 'orange',
+            radius: 100
         }).addTo(mymap).bindPopup(`Montreal-Trudeau airport shuttle from the airport toward EconoParc parking lots according to the following route order: P7, P9 and P8	March 8, around 5 p.m.	 End of targeted surveillance: March 22, 2020`);;
 
         var popup = L.popup();

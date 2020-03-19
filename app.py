@@ -45,5 +45,9 @@ def get_coords():
 		return_dict["data"].append(dict_item)
 	return return_dict
 
+@app.route("/contact")
+def contact():
+	return render_template("contact.html")
+
 if __name__ == '__main__':
 	app.run(debug=True)
