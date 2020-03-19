@@ -97,5 +97,19 @@ class User(Base):
 		self.date_created = datetime.datetime.now()
 		self.date_modified = datetime.datetime.now()	
 
+
+class View(Base):
+	__tablename__ = "views"
+
+	id = Column(Integer, primary_key=True, autoincrement=True)
+	uuid = Column(UUID(as_uuid=True), default=uuid4)
+	date_created = Column(DateTime)
+	date_modified = Column(DateTime)	
+
+	def create_view(self):
+		self.date_created = datetime.datetime.now()
+		self.date_modified = datetime.datetime.now()	
+
+
 if __name__ == "__main__":
 	Base.metadata.create_all(engine)
