@@ -11,7 +11,11 @@ class CovidScraper:
 		self.rows = self.htmltable.find_all("tr")
 		self.montreal_cases = -1
 		self.quebec_prov_cases = -1
-		print(self.page.text)
+
+		# print(self.page.text)
+		print(self.soup.text)
+		print(self.htmltable.text)
+
 		for row in self.rows:
 			row_list = row.find_all("td")
 			# print(row_list)
