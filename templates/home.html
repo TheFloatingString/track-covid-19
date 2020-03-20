@@ -179,7 +179,7 @@
     </div>
 
     <script type="text/javascript">
-        var mymap = L.map('mapid').setView([45.55, -73.7], 10);
+        var mymap = L.map('mapid').setView([46.55, -73.7], 7);
 
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 20,
@@ -201,7 +201,7 @@
                 	row = data["data"]["administrative_regions"][key]
 
 	                L.polygon(row["coordinates"], {
-	                    color: "hsl(45,100%,"+(95-row["cases"]).toString()+"%)",
+	                    color: "hsl(160,100%,"+(95-row["cases"]).toString()+"%)",
 	                    "fillOpacity": .65
 	                }).addTo(mymap).bindPopup(row["name"] + ': '+ row["cases"] + ' cases');
                 }
@@ -211,12 +211,12 @@
                 console.log(line);
                 console.log(line.coordinates)
                 L.polygon(line.coordinates, {
-                    color: "hsl(20,100%,50%)"
+                    color: "hsl(260,100%,50%)"
                 }).addTo(mymap).bindPopup(line.description);
             }
 
 	        L.circle([45.475530, -73.614430], {
-	            color: 'hsl(20,100%,50%)',
+	            color: 'hsl(260,100%,50%)',
 	            radius: 100
 	        }).addTo(mymap).bindPopup(`Bibliothèque de Notre-Dame-de-Grâce 
 				3755, rue Botrel, Montréal H4A 3G8
@@ -225,22 +225,22 @@
 				 End of targeted surveillance: March 25, 2020`);
 
 	        L.circle([45.466953, -73.742924], {
-	            color: 'hsl(20,100%,50%)',
+	            color: 'hsl(260,100%,50%)',
 	            radius: 100
 	        }).addTo(mymap).bindPopup(`Montreal-Trudeau airport shuttle from the airport toward EconoParc parking lots according to the following route order: P7, P9 and P8	March 8, around 5 p.m.	 End of targeted surveillance: March 22, 2020`);
 
 	        L.circle([45.497730, -73.580250], {
-	            color: 'hsl(20,100%,50%)',
+	            color: 'hsl(260,100%,50%)',
 	            radius: 100
 	        }).addTo(mymap).bindPopup(`Restaurant Aunja 1448, rue Sherbrooke Ouest, Montréal, H3G 1K4	March 12, between 12:25 p.m and 1:05 p.m End of targeted surveillance: March 27, 2020`);
 
 	        L.circle([45.890500, -73.290300], {
-	            color: 'hsl(20,100%,50%)',
+	            color: 'hsl(260,100%,50%)',
 	            radius: 100
 	        }).addTo(mymap).bindPopup(`FADOQ Lavaltrie, 49, chemin Lavaltrie, Lavaltrie, J5T 2H3	March 11, between 12:15 p.m and 3:45 p.m	End of targeted surveillance: March 25, 2020`);
 
 	        L.circle([46.081990, -73.175830], {
-	            color: 'hsl(20,100%,50%)',
+	            color: 'hsl(260,100%,50%)',
 	            radius: 100
 	        }).addTo(mymap).bindPopup(`Centre d'action bénévole de Berthier, 180, rue Champlain, Berthierville, J0K 1A0	March 12, between 10:45 a.m and 3 p.m	End of targeted surveillance: March 26, 2020`);
 
