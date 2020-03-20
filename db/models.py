@@ -44,7 +44,7 @@ class TransitLine(Base):
 		self.date_modified = datetime.datetime.now()
 
 	def __repr__(self):
-		return "<Entry(uuid='%s', name='%s'" %(self.uuid, self.name)
+		return "<TransitLine(uuid='%s', name='%s')>" %(self.uuid, self.name)
 
 
 class Location(Base):
@@ -110,6 +110,38 @@ class View(Base):
 		self.date_created = datetime.datetime.now()
 		self.date_modified = datetime.datetime.now()	
 
+
+class Region(Base):
+	__tablename__ = "regions"
+
+	id = Column(Integer, primary_key=True, autoincrement=True)
+	uuid = Column(UUID(as_uuid=True), default=uuid4)
+	name = Column(String)
+	coordinates = Column(ARRAY(Float))
+	cases = Column(Integer)
+	recoveries = Column(Integer)
+	fatalities = Column(Integer)
+	description = Column(String)
+	date_created = Column(DateTime)
+	date_modified = Column(DateTime)
+
+	def create_region(self, name, coordinates):
+		self.name = name
+		self.coordinates = coordinates
+		self.date_created = datetime.datetime.now()
+		self.date_modified = datetime.datetime.now()	
+
+	def update_numbers(self, cases, recoveries, fatalities):
+		self.cases = cases
+		self.recoveries = recoveries
+		self.fatalities = fatalities
+		self.date_modified = datetime.datetime.now()
+
+	def update_description(self, description):
+		self.description = description
+
+	def __repr__(self):
+		return "<Region(uuid='%s', name='%s', cases='%s')>" %(self.uuid, self.name, self.cases)
 
 if __name__ == "__main__":
 	Base.metadata.create_all(engine)
