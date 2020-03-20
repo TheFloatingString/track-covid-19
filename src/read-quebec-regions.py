@@ -27,17 +27,28 @@ def fixes(string):
 
 	return string
 
+session.query(Region).delete()
+session.commit()
+
 for region in data["features"]:
 	print(fixes(region["properties"]["res_nm_reg"]))
 	# print(len(region["geometry"]["coordinates"]))
 	name = fixes(region["properties"]["res_nm_reg"])
 	coordinates = []
+	final_coordinates = []
 	if "e-Nord" in fixes(region["properties"]["res_nm_reg"]):
-		coordinates = region["geometry"]["coordinates"][0]
+		coordinates = [region["geometry"]["coordinates"][0]]
 	else:
 		coordinates = region["geometry"]["coordinates"]
+
+
+	for row in coordinates[0][0]:
+		# print(row)
+		final_coordinates.append(list(reversed(row)))
+		# break
 	region = Region()
-	region.create_region(name, coordinates)
-	print(region)
+	region.create_region(name, final_coordinates)
+	print(region.name)
+	print()
 	session.add(region)
 	session.commit()

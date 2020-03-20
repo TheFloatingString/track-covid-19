@@ -54,6 +54,6 @@ def contact():
 	return render_template("contact.html")
 
 if __name__ == '__main__':
-	for x in session.query(View):
-		print(x.id, x.date_created)
+	# for x in session.query(View):
+		# print(x.id, x.date_created)
 	app.run(debug=True)

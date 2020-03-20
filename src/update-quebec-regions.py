@@ -1,5 +1,8 @@
 import sys
 import os
+
+import numpy as np
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 import json
@@ -18,5 +21,12 @@ session = Session()
 for region in session.query(Region):
 	print(region.id, region.uuid, region.name)
 
-x = session.query(Region).filter(Region.uuid=="b8f57cc0-52e7-4511-9b9d-fc4a3432489e").first()
-print(x)
+# x = session.query(Region).filter(Region.name=="Mauricie").first()
+
+# data = np.genfromtxt("results.csv", delimiter=',')
+# x.coordinates = data.tolist()
+# session.add(x)
+# session.commit()
+
+for x in session.query(Region):
+	print(x.id, x.name)
