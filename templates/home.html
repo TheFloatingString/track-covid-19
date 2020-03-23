@@ -297,11 +297,12 @@
                 document.getElementById("quebec-prov-cases").innerHTML = data["data"]["provinces"]["Québec"]["cases"];
                 for (var key in data["data"]["administrative_regions"]){
                 	row = data["data"]["administrative_regions"][key]
+                	var message = `<b>`+row["name"]+`</b><br>Cases: `+row["cases"]+`<br>Case percetage: `+row["case-percent"]+` %<br>1 case per `+row["case-per-pop"]+` people`
 
 	                L.polygon(row["coordinates"], {
 	                    color: "hsl(160,100%,"+(95-row["cases"]).toString()+"%)",
 	                    "fillOpacity": .65
-	                }).addTo(mymap).bindPopup(row["name"] + ': '+ row["cases"] + ' cases');
+	                }).addTo(mymap).bindPopup(message);
                 }
 
             var coordinates_json = $.get("/get_coordinates").done(function(data) {
