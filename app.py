@@ -1,7 +1,7 @@
 import os
 
 from src import webscrape_data
-from db.models import TransitLine, View, Location
+from db.models import TransitLine, View, Location, Anxiety
 
 from flask import Flask, render_template, request
 from flask_cors import CORS, cross_origin
@@ -71,7 +71,18 @@ def post_location():
 
 	return str(request.form)
 
+@app.route("/post_anxiety", methods=["GET", "POST"])
+def post_anxiety():
+	print('post_anxiety')
+	print(request.form)
+	anxiety = Anxiety()
+	anxiety.create(dict_description=request.form)
+	session.add(anxiety)
+	session.commit()
+	print("done!")
+	return "Done"
+
 if __name__ == '__main__':
-	# for x in session.query(View):
-		# print(x.id, x.date_created)
+	for x in session.query(Anxiety):
+		print(x.id, x.dict_description)
 	app.run(debug=True)
