@@ -277,6 +277,11 @@
 	</script>
 
     <script type="text/javascript">
+
+		function logistic(value){
+			return (1/(1+Math.exp(-value/30))-.5)*2
+		}
+
         var mymap = L.map('mapid').setView([46.55, -73.7], 7);
 
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -300,8 +305,9 @@
                 	var message = `<b>`+row["name"]+`</b><br>Cases: `+row["cases"]+`<br>Case percetage: `+row["case-percent"]+` %<br>1 case per `+row["case-per-pop"]+` people`
 
 	                L.polygon(row["coordinates"], {
-	                    color: "hsl(160,100%,"+(95-row["cases"]).toString()+"%)",
-	                    "fillOpacity": .65
+	                    // color: "hsl(160,100%,"+(95-logistic(row["cases"])*70).toString()+"%)",
+	                    color: "hsl(160,100%,"+(95-(row["cases"])).toString()+"%)",
+	                    "fillOpacity": .35
 	                }).addTo(mymap).bindPopup(message);
                 }
 
