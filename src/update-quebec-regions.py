@@ -21,12 +21,13 @@ session = Session()
 for region in session.query(Region):
 	print(region.id, region.uuid, region.name)
 
-# x = session.query(Region).filter(Region.name=="Mauricie").first()
+x = session.query(Region).filter(Region.uuid=="763b6a9f-2776-477b-8cc0-ffba3d61a611").first()
 
 # data = np.genfromtxt("results.csv", delimiter=',')
+x.name = "Abitibi-Temiscamingue"
 # x.coordinates = data.tolist()
-# session.add(x)
-# session.commit()
+session.add(x)
+session.commit()
 
 for x in session.query(Region):
-	print(x.id, x.name)
+	print(x.id, x.name, len(x.coordinates))
