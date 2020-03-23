@@ -3,7 +3,7 @@ Verify population data for Mauricie and Centre du Quebec
 """
 
 from sqlalchemy import Table, Column, Integer, Float, String, MetaData, DateTime, Boolean
-from sqlalchemy.types import ARRAY
+from sqlalchemy.types import ARRAY, PickleType
 from sqlalchemy	import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.postgresql import UUID
@@ -166,11 +166,15 @@ class Anxiety(Base):
 	uuid = Column(UUID(as_uuid=True), default=uuid4)
 	name=Column(String)
 	description = Column(String)
+	dict_description = Column(PickleType)
 	user_id = Column(UUID)
+	date_created = Column(DateTime)
+	date_modified = Column(DateTime)	
 
-	def create(self, name=None, description=None, user_id=None):
+	def create(self, name=None, description=None, dict_description=None, user_id=None):
 		self.name = name
 		self.description = description
+		self.dict_description = dict_description
 		self.user_id = user_id
 		self.date_created = datetime.datetime.now()
 		self.date_modified = datetime.datetime.now()	

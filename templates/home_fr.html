@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>COVID-ZERO</title>
+    <title>COVID-ZÉRO</title>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -146,7 +146,7 @@
 <body>
 
     <nav class="navbar navbar-light bg-light" style="height:50px">
-        <a class="navbar-brand" href="/">COVID-ZERO</a>
+        <a class="navbar-brand" href="/">COVID-ZÉRO</a>
     </nav>
     <div class="container-fluid">
         <div id="row-custom-1" class="row">
@@ -154,7 +154,7 @@
                 <div id="city" class="standard-padding">
                     <!-- <div class="card" style="margin: 2px; height: 5px;"> -->
                     <!-- <div class="card-body"> -->
-                    <p>Selected region: Québec </p>
+                    <p>Région sélectionnée: le Québec </p>
                     <!-- </div> -->
                     <!-- </div> -->
                 </div>
@@ -162,10 +162,10 @@
                     <div class="container">
                         <div class="row" style="vertical-align: text-bottom;">
                             <div style="width: 25%;">
-                                <span class="large-number" id="montreal-cases"></span> <br>cases in Montreal*
+                                <span class="large-number" id="montreal-cases"></span> <br>cas à Montréal*
                             </div>
                             <div style="width: 25%;">
-                                <span id="quebec-prov-cases" class="large-number"></span><br>cases in Quebec*
+                                <span id="quebec-prov-cases" class="large-number"></span><br>cas à Québec*
                             </div>
                             <!-- 						<div style="width: 25%;">
 							<b>X</b> cases in Montreal
@@ -178,7 +178,7 @@
                 </div>
                 <div id="map-container">
                 	<div id="map-label" class="standard-padding">
-                		<p>Map of targeted surveillance (click coloured locations for more details)**</p>
+                		<p>Carte de la surveillance ciblée (cliquez cette carte pour obtenir plus de détails)**</p>
                 	</div>
                     <div id="mapid"></div>
                 </div>
@@ -186,12 +186,12 @@
             <div class="col-custom-2 standard-padding">
                 <div id="updates">
 
-			<button class="accordion">Updates</button>
+			<button class="accordion">Nouveautés</button>
 			<div class="panel">
-			  <p>Coming soon.</p>
+			  <p>À venir.</p>
 			</div>
 
-			<button class="accordion">Businesses</button>
+			<button class="accordion">Entreprises</button>
 			<div class="panel">
 				<p style="padding-top: 18px;">If you would like to have your business' informaiton listed on this website on its operations during this current pandemic, please fill out the quick form below:</p>
 				<form id="reg-form">
@@ -220,30 +220,7 @@
 
 			<button class="accordion">Anxiety Tracker</button>
 			<div class="panel">
-					<p>This is a open data form for to better understand how to reduce anxiety during the COVID-19 data. <b>Data is anonymous</b>, and will be visible to the public: the goal is to encourage sharing information in a way that respects privacy (individuals cannot be recognized) and promotes understanding of how to improve mental health.</p>
-					<form id="anxiety-form">
-					<div class="form-group">
-						<label>How anxious are you on a scale from 0 (none) to 10 (very)?</label>
-						<input type="number" name="score" min=0 max=10 class="form-control" placeholder="Anxiety score">
-					</div>
-
-					<div class="form-group">
-						<label>What describes your lifestyle during COVID-19 outbreak?</label><br>
-						<input name="exercise" class="checkbox" type="checkbox"> Regular exercise<br>
-						<input name="social" class="checkbox" type="checkbox"> Active social life<br>
-						<input name="sleep" class="checkbox" type="checkbox"> Sleeping properly<br>
-						<input name="eat" class="checkbox" type="checkbox"> Eating propely<br>
-						<input name="eat" class="checkbox" type="checkbox"> Always find a hobby to do<br>
-						<input name="eat" class="checkbox" type="checkbox"> Helping others in need<br>
-					</div>
-
-					<div class="form-group">
-						<label>Any other description about what you're going through?</label>
-						<input name="description" class="form-control" placeholder="Description">
-					</div>
-
-					<button id="post-anxiety" class="btn btn-outline-dark btn-block">Submit</button>
-				</form>
+					<p>À venir.</p>
 			</div>
 
 			<button class="accordion">Data Sources</button>
@@ -260,7 +237,7 @@
 			<div class="panel">
 				<p><b>Contact page creator (comments, suggestions, questions?)</b></p>
 				<p><b>Laurence Liang</b>
-				<br><a href="mailto:laurencel2001@gmail.com">laurencel2001@gmail.com</a>
+				<br>laurencel2001@gmail.com
 				<br><a href="https://github.com/TheFloatingString" target="__blank">GitHub (TheFloatingString)</a>
 			</div>
 
@@ -283,13 +260,6 @@
 	    });
 	});
 
-	$("#post-anxiety").click(function(){        
-    $.post("/post_anxiety", $("#anxiety-form").serialize(), function(data) {
-	        alert("Form sent!");
-	    });
-	});
-
-
 	var acc = document.getElementsByClassName("accordion");
 	var i;
 
@@ -307,11 +277,6 @@
 	</script>
 
     <script type="text/javascript">
-
-		function logistic(value){
-			return (1/(1+Math.exp(-value/30))-.5)*2
-		}
-
         var mymap = L.map('mapid').setView([46.55, -73.7], 7);
 
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -335,9 +300,8 @@
                 	var message = `<b>`+row["name"]+`</b><br>Cases: `+row["cases"]+`<br>Case percetage: `+row["case-percent"]+` %<br>1 case per `+row["case-per-pop"]+` people`
 
 	                L.polygon(row["coordinates"], {
-	                    // color: "hsl(160,100%,"+(95-logistic(row["cases"])*70).toString()+"%)",
-	                    color: "hsl(160,100%,"+(95-(row["cases"])).toString()+"%)",
-	                    "fillOpacity": .35
+	                    color: "hsl(160,100%,"+(95-(row["cases"])*0.1).toString()+"%)",
+	                    "fillOpacity": .65
 	                }).addTo(mymap).bindPopup(message);
                 }
 
