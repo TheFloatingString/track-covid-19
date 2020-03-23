@@ -1,3 +1,7 @@
+"""
+Verify population data for Mauricie and Centre du Quebec
+"""
+
 from sqlalchemy import Table, Column, Integer, Float, String, MetaData, DateTime, Boolean
 from sqlalchemy.types import ARRAY
 from sqlalchemy	import create_engine
@@ -56,7 +60,6 @@ class Location(Base):
 	category = Column(ARRAY(String))	# categories: ['business', 'test_centre']
 	creator_id = Column(UUID)
 	coordinates = Column(ARRAY(Float))
-	population = Column(Integer)
 	address = Column(String)
 	description = Column(String)
 	update_ids = Column(ARRAY(UUID))
@@ -133,6 +136,7 @@ class Region(Base):
 	recoveries = Column(Integer)
 	fatalities = Column(Integer)
 	description = Column(String)
+	population = Column(Integer)
 	date_created = Column(DateTime)
 	date_modified = Column(DateTime)
 
