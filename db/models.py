@@ -67,7 +67,7 @@ class Location(Base):
 	date_created = Column(DateTime)
 	date_modified = Column(DateTime)
 
-	def create_location(self, name, address=None, description=None, contact=None):
+	def create_location(self, name, address=None, description=None, creator_id=None):
 		self.name = name 
 		self.address = address
 		self.description = description
@@ -158,6 +158,23 @@ class Region(Base):
 
 	def __repr__(self):
 		return "<Region(uuid='%s', name='%s', cases='%s')>" %(self.uuid, self.name, self.cases)
+
+class Anxiety(Base):
+	__tablename__ = "anxieties"
+
+	id = Column(Integer, primary_key=True, autoincrement=True)
+	uuid = Column(UUID(as_uuid=True), default=uuid4)
+	name=Column(String)
+	description = Column(String)
+	user_id = Column(UUID)
+
+	def create(self, name=None, description=None, user_id=None):
+		self.name = name
+		self.description = description
+		self.user_id = user_id
+		self.date_created = datetime.datetime.now()
+		self.date_modified = datetime.datetime.now()	
+
 
 if __name__ == "__main__":
 	Base.metadata.create_all(engine)
