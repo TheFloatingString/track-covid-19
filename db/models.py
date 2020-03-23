@@ -53,13 +53,23 @@ class Location(Base):
 	id = Column(Integer, primary_key=True, autoincrement=True)
 	uuid = Column(UUID(as_uuid=True), default=True)
 	name = Column(String)
-	category = Column(ARRAY(String))
+	category = Column(ARRAY(String))	# categories: ['business', 'test_centre']
+	creator_id = Column(UUID)
 	coordinates = Column(ARRAY(Float))
 	address = Column(String)
 	description = Column(String)
 	update_ids = Column(ARRAY(UUID))
 	date_created = Column(DateTime)
 	date_modified = Column(DateTime)
+
+	def create_location(self, name, address=None, description=None, creator_id=None)
+		self.name = name 
+		self.address = address
+		self.description = description
+		self.creator_id = creator_id
+		self.date_created = datetime.datetime.now()
+		self.date_modified = datetime.datetime.now()	
+
 
 class LocationUpdate(Base):
 	__tablename__ = "location_updates"
