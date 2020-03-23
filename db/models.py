@@ -56,6 +56,7 @@ class Location(Base):
 	category = Column(ARRAY(String))	# categories: ['business', 'test_centre']
 	creator_id = Column(UUID)
 	coordinates = Column(ARRAY(Float))
+	population = Column(Integer)
 	address = Column(String)
 	description = Column(String)
 	update_ids = Column(ARRAY(UUID))
