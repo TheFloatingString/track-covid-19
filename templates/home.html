@@ -28,7 +28,7 @@
         }
         
 		a{
-			color: #818aeb;
+			color: hsl(160, 50%, 50%);
 		}
 
 		.large-number{
@@ -111,6 +111,34 @@
 			    width: 60%;
 			}*/
         }
+
+		.accordion {
+		  background-color: white;
+		  color: #444;
+		  cursor: pointer;
+		  padding-top: 18px;
+		  padding-bottom: 18px;	
+		  font-weight: 700;
+		  width: 100%;
+		  border: none;
+		  text-align: left;
+		  outline: none;
+		  /*font-size: 15px;*/
+		  transition: 0.4s;
+		}
+
+		.active, .accordion:hover {
+		  background-color: hsl(160,100%,95%);
+		}
+
+		.panel {
+		  padding: 0 18px 0px 18px;
+		  background-color: white;
+		  max-height: 0;
+		  overflow: hidden;
+		  transition: max-height 0.2s ease-out;
+		}
+
     </style>
 
 </head>
@@ -157,26 +185,96 @@
             </div>
             <div class="col-custom-2 standard-padding">
                 <div id="updates">
-                    <p><b>Updates</b>
-                    <br><i>Coming soon</i></p>
 
-                    <p><b>Data Sources</b>
-                	<br><a href="https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/situation-coronavirus-in-quebec/" target="__blank">Number of cases in Québec (Govt. of Québec)</a>
+			<button class="accordion">Updates</button>
+			<div class="panel">
+			  <p>Coming soon.</p>
+			</div>
+
+			<button class="accordion">Businesses</button>
+			<div class="panel">
+				<p style="padding-top: 18px;">If you would like to have your business' informaiton listed on this website on its operations during this current pandemic, please fill out the quick form below:</p>
+				<form id="reg-form">
+					<div class="form-group">
+						<label>Business Name</label>
+						<input name="name" class="form-control" placeholder="Business Name">
+					</div>
+
+					<div class="form-group">
+						<label>Address</label>
+						<input name="address" class="form-control" placeholder="Business Address">
+					</div>
+
+					<div class="form-group">
+						<label>Description of how the business is operating during the COVID-19 outbreak</label>
+						<input name="description" class="form-control" placeholder="Description">
+					</div>
+
+					<div class="form-group">
+						<label>Contact information</label>
+						<input name="contact" class="form-control" placeholder="Contact">
+					</div>
+					<button id="post-btn" class="btn btn-outline-dark btn-block">Submit</button>
+				</form>
+			</div>
+
+			<button class="accordion">Anxiety Tracker</button>
+			<div class="panel">
+					<p>Coming soon.</p>
+			</div>
+
+			<button class="accordion">Data Sources</button>
+			<div class="panel">
+                    <p><a href="https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/situation-coronavirus-in-quebec/" target="__blank">Number of cases in Québec (Govt. of Québec)</a>
                     <br><a href="https://www.quebec.ca/en/health/health-issues/a-z/general-information-about-coronavirus/" target="__blank">Targeted Surveillance in Montreal (Govt. of Québec)</a>
 					<br>* Number of cases are updated in real time according to the above data sources
 					<br>** Targeted surveillance details are updated manually to be as up to date as possible.
 					<br>*** Rendering for Mauricie-Centre-du-Québec doesn't yet include Centre-du-Québec. Fix to come soon.
                     </p>
+			</div>
 
-                    <p><b>Contact page creator (comments, suggestions, questions?)</b>
-                    <br><a href="/contact">Contact information</a> 	
-                    </p>
+			<button class="accordion">Contact</button>
+			<div class="panel">
+				<p><b>Contact page creator (comments, suggestions, questions?)</b></p>
+				<p><b>Laurence Liang</b>
+				<br>laurencel2001@gmail.com
+				<br><a href="https://github.com/TheFloatingString" target="__blank">GitHub (TheFloatingString)</a>
+			</div>
+
+			<button class="accordion">Contribute (GitHub)</button>
+			<div class="panel">
                     <p><b>GitHub Repository</b>
                     <br><a href="https://github.com/TheFloatingString/track-covid-19" target="__blank">TheFloatingString/track-covid-19</a></p>
+			</div>
+
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+
+	$("#post-btn").click(function(){        
+    $.post("/post_location", $("#reg-form").serialize(), function(data) {
+	        alert("Form sent!");
+	    });
+	});
+
+	var acc = document.getElementsByClassName("accordion");
+	var i;
+
+	for (i = 0; i < acc.length; i++) {
+	  acc[i].addEventListener("click", function() {
+	    this.classList.toggle("active");
+	    var panel = this.nextElementSibling;
+	    if (panel.style.maxHeight) {
+	      panel.style.maxHeight = null;
+	    } else {
+	      panel.style.maxHeight = panel.scrollHeight + "px";
+	    } 
+	  });
+	}
+	</script>
 
     <script type="text/javascript">
         var mymap = L.map('mapid').setView([46.55, -73.7], 7);
