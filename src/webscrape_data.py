@@ -72,7 +72,9 @@ class CovidScraper:
 				# 	self.quebec_prov_cases = int(row_list[1].text)
 
 			elif len(row_list)>=2 and "Total" in row_list[0].text:
-				return_dict["data"]["provinces"]["Québec"] = {"name":"Québec", "cases":int(row_list[1].text)}
+				print(type(row_list[1].text))
+				print(row_list[1].text.replace('\xa0', ''))
+				return_dict["data"]["provinces"]["Québec"] = {"name":"Québec", "cases":int(row_list[1].text.replace('\xa0', ''))}
 
 		return return_dict
 

@@ -83,6 +83,6 @@ def post_anxiety():
 	return "Done"
 
 if __name__ == '__main__':
-	for x in session.query(Anxiety):
-		print(x.id, x.dict_description)
+	for x in session.query(Location):
+		print(x.id, x.name)
 	app.run(debug=True)
