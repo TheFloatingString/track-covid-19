@@ -47,7 +47,7 @@ class CovidScraper:
 			# print()
 			if len(row_list)>=2 and ' - ' in row_list[0].text:
 
-				admin_region_name = row_list[0].text.split(' - ')[1].replace(' ','-')
+				admin_region_name = row_list[0].text.split(' - ')[1].replace(' ','-').replace('1','')
 				number_of_cases = int(row_list[1].text)
 				print(row_list[0].text)
 
