@@ -48,21 +48,22 @@ class CovidScraper:
 			if len(row_list)>=2 and ' - ' in row_list[0].text:
 
 				admin_region_name = row_list[0].text.split(' - ')[1].replace(' ','-')
-				number_of_cases = int(row_list[1].text)
+				number_of_cases = int(row_list[1].text.replace("\xa0", ''))
 				print(row_list[0].text)
 
 				x = session.query(Region).filter(Region.name == admin_region_name).first()
-				print(x.name, len(x.coordinates))
+				if x is not None:
+					print(x.name, len(x.coordinates))
 
-				element_dict = {"name":admin_region_name, 
-				"cases":number_of_cases,
-				"coordinates":x.coordinates,
-				"population":x.population,
-				"case-per-pop":int(round(x.population/number_of_cases)),
-				"case-percent":round(number_of_cases/x.population*100, 6)}
+					element_dict = {"name":admin_region_name, 
+					"cases":number_of_cases,
+					"coordinates":x.coordinates,
+					"population":x.population,
+					"case-per-pop":int(round(x.population/number_of_cases)),
+					"case-percent":round(number_of_cases/x.population*100, 6)}
 
-				# print(return_dict["data"]["administrative_regions"])
-				return_dict["data"]["administrative_regions"][admin_region_name] = element_dict
+					# print(return_dict["data"]["administrative_regions"])
+					return_dict["data"]["administrative_regions"][admin_region_name] = element_dict
 
 				# if ' - ' in str(row_list[0].text):
 				# 	print(row_list[0].text.split(' - ')[1])
@@ -72,7 +73,7 @@ class CovidScraper:
 				# 	self.quebec_prov_cases = int(row_list[1].text)
 
 			elif len(row_list)>=2 and "Total" in row_list[0].text:
-				return_dict["data"]["provinces"]["Québec"] = {"name":"Québec", "cases":int(row_list[1].text)}
+				return_dict["data"]["provinces"]["Québec"] = {"name":"Québec", "cases":int(row_list[1].text.replace("\xa0", ''))}
 
 		return return_dict
 
