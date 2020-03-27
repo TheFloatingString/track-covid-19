@@ -52,17 +52,18 @@ class CovidScraper:
 				print(row_list[0].text)
 
 				x = session.query(Region).filter(Region.name == admin_region_name).first()
-				print(x.name, len(x.coordinates))
+				if x.name is not None:
+					print(x.name, len(x.coordinates))
 
-				element_dict = {"name":admin_region_name, 
-				"cases":number_of_cases,
-				"coordinates":x.coordinates,
-				"population":x.population,
-				"case-per-pop":int(round(x.population/number_of_cases)),
-				"case-percent":round(number_of_cases/x.population*100, 6)}
+					element_dict = {"name":admin_region_name, 
+					"cases":number_of_cases,
+					"coordinates":x.coordinates,
+					"population":x.population,
+					"case-per-pop":int(round(x.population/number_of_cases)),
+					"case-percent":round(number_of_cases/x.population*100, 6)}
 
-				# print(return_dict["data"]["administrative_regions"])
-				return_dict["data"]["administrative_regions"][admin_region_name] = element_dict
+					# print(return_dict["data"]["administrative_regions"])
+					return_dict["data"]["administrative_regions"][admin_region_name] = element_dict
 
 				# if ' - ' in str(row_list[0].text):
 				# 	print(row_list[0].text.split(' - ')[1])
