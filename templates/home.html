@@ -336,7 +336,7 @@
 
 	                L.polygon(row["coordinates"], {
 	                    // color: "hsl(160,100%,"+(95-logistic(row["cases"])*70).toString()+"%)",
-	                    color: "hsl(160,100%,"+(95-(row["cases"])).toString()+"%)",
+	                    color: "hsl(160,100%,"+(95-(row["cases"])/3).toString()+"%)",
 	                    "fillOpacity": .35
 	                }).addTo(mymap).bindPopup(message);
                 }
