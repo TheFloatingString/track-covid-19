@@ -52,7 +52,9 @@ class CovidScraper:
 				print(row_list[0].text)
 
 				x = session.query(Region).filter(Region.name == admin_region_name).first()
+
 				if x is not None:
+
 					print(x.name, len(x.coordinates))
 
 					element_dict = {"name":admin_region_name, 
