@@ -1,9 +1,9 @@
 import os
 
 from src import webscrape_data
-from db.models import TransitLine, View
+from db.models import TransitLine, View, Location, Anxiety
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_cors import CORS, cross_origin
 
 from sqlalchemy	import create_engine
@@ -19,15 +19,15 @@ engine = create_engine(os.environ["DATABASE_URL"], echo = True)
 Session = sessionmaker()
 Session.configure(bind=engine)
 session = Session()
-
+session.rollback()
 
 @cross_origin()
 @app.route("/")
 def home():
-	view = View()
-	view.create_view()
-	session.add(view)
-	session.commit()
+	# view = View()
+	# view.create_view()
+	# session.add(view)
+	# session.commit()
 	return render_template("home.html")
 
 @cross_origin()
@@ -53,7 +53,36 @@ def get_coords():
 def contact():
 	return render_template("contact.html")
 
+@app.route("/post_location", methods=["GET", "POST"])
+def post_location():
+	# print("post_location")
+	# print(request.form)
+	# print(request.form.get("name"))
+	# print(request.form.get("description"))
+
+	location = Location()
+	location.create_location(name=request.form["name"], 
+		address=request.form["address"], 
+		description=request.form["description"],
+		contact=request.form["contact"])
+
+	session.add(location)
+	session.commit()
+
+	return str(request.form)
+
+@app.route("/post_anxiety", methods=["GET", "POST"])
+def post_anxiety():
+	print('post_anxiety')
+	print(request.form)
+	anxiety = Anxiety()
+	anxiety.create(dict_description=request.form)
+	session.add(anxiety)
+	session.commit()
+	print("done!")
+	return "Done"
+
 if __name__ == '__main__':
-	# for x in session.query(View):
-		# print(x.id, x.date_created)
+	# for x in session.query(Anxiety):
+		# print(x.id)
 	app.run(debug=True)

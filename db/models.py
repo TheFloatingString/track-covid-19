@@ -1,5 +1,9 @@
+"""
+Verify population data for Mauricie and Centre du Quebec
+"""
+
 from sqlalchemy import Table, Column, Integer, Float, String, MetaData, DateTime, Boolean
-from sqlalchemy.types import ARRAY
+from sqlalchemy.types import ARRAY, PickleType
 from sqlalchemy	import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.postgresql import UUID
@@ -51,15 +55,26 @@ class Location(Base):
 	__tablename__ = "locations"
 
 	id = Column(Integer, primary_key=True, autoincrement=True)
-	uuid = Column(UUID(as_uuid=True), default=True)
+	uuid = Column(UUID(as_uuid=True), default=uuid4)
 	name = Column(String)
-	category = Column(ARRAY(String))
+	category = Column(ARRAY(String))	# categories: ['business', 'test_centre']
+	creator_id = Column(UUID)
 	coordinates = Column(ARRAY(Float))
 	address = Column(String)
 	description = Column(String)
+	contact = Column(String)
 	update_ids = Column(ARRAY(UUID))
 	date_created = Column(DateTime)
 	date_modified = Column(DateTime)
+
+	def create_location(self, name, address=None, description=None, creator_id=None):
+		self.name = name 
+		self.address = address
+		self.description = description
+		self.contact = contact
+		self.date_created = datetime.datetime.now()
+		self.date_modified = datetime.datetime.now()	
+
 
 class LocationUpdate(Base):
 	__tablename__ = "location_updates"
@@ -122,6 +137,7 @@ class Region(Base):
 	recoveries = Column(Integer)
 	fatalities = Column(Integer)
 	description = Column(String)
+	population = Column(Integer)
 	date_created = Column(DateTime)
 	date_modified = Column(DateTime)
 
@@ -142,6 +158,27 @@ class Region(Base):
 
 	def __repr__(self):
 		return "<Region(uuid='%s', name='%s', cases='%s')>" %(self.uuid, self.name, self.cases)
+
+class Anxiety(Base):
+	__tablename__ = "anxieties"
+
+	id = Column(Integer, primary_key=True, autoincrement=True)
+	uuid = Column(UUID(as_uuid=True), default=uuid4)
+	name=Column(String)
+	description = Column(String)
+	dict_description = Column(PickleType)
+	user_id = Column(UUID)
+	date_created = Column(DateTime)
+	date_modified = Column(DateTime)	
+
+	def create(self, name=None, description=None, dict_description=None, user_id=None):
+		self.name = name
+		self.description = description
+		self.dict_description = dict_description
+		self.user_id = user_id
+		self.date_created = datetime.datetime.now()
+		self.date_modified = datetime.datetime.now()	
+
 
 if __name__ == "__main__":
 	Base.metadata.create_all(engine)
