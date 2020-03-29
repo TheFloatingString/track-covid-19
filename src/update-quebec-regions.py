@@ -23,8 +23,48 @@ for region in session.query(Region):
 
 # x = session.query(Region).filter(Region.name=="Mauricie").first()
 
+<<<<<<< Updated upstream
 # data = np.genfromtxt("results.csv", delimiter=',')
 # x.coordinates = data.tolist()
+=======
+x = session.query(Region).filter(Region.uuid=="763b6a9f-2776-477b-8cc0-ffba3d61a611").first()
+
+# # data = np.genfromtxt("results.csv", delimiter=',')
+x.name = "Abitibi-Témiscamingue"
+# # x.coordinates = data.tolist()
+session.add(x)
+session.commit()
+
+# upgrade_list = [[85,276368],
+# 			[87,146717],
+# 			[84,382604],
+# 			[86,90311],
+# 			[88,266112+242399],
+# 			[89,729997],
+# 			[90,589400],
+# 			[91,420082],
+# 			[92,494796],
+# 			[93,1507070],
+# 			[94,319004],
+# 			[95,44561],
+# 			[96,1942044],
+# 			[97,92518],
+# 			[98,197385],
+# 			[99,422993],
+# 			[100,242399]]
+
+# for row in upgrade_list:
+# 	x = session.query(Region).filter(Region.id==row[0]).first()
+# 	x.population = row[1]
+# 	session.add(x)
+# 	session.commit()
+
+# x = session.query(Region).filter(Region.uuid=="763b6a9f-2776-477b-8cc0-ffba3d61a611").first()
+
+# # data = np.genfromtxt("results.csv", delimiter=',')
+# x.name = "Abitibi-Temiscamingue"
+# # x.coordinates = data.tolist()
+>>>>>>> Stashed changes
 # session.add(x)
 # session.commit()
 

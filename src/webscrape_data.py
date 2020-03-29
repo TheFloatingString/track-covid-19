@@ -48,7 +48,12 @@ class CovidScraper:
 			if len(row_list)>=2 and ' - ' in row_list[0].text:
 
 				admin_region_name = row_list[0].text.split(' - ')[1].replace(' ','-')
+<<<<<<< Updated upstream
 				number_of_cases = int(row_list[1].text)
+=======
+				number_of_cases = int(row_list[1].text.replace("\xa0", '').replace(' ', ''))
+
+>>>>>>> Stashed changes
 				print(row_list[0].text)
 
 				x = session.query(Region).filter(Region.name == admin_region_name).first()
